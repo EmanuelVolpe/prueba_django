@@ -46,7 +46,7 @@ def agregar(request):
 
         else:
             # If the form is invalid, re-render the page with existing information.
-            return render(request, "tasks/add.html", {
+            return render(request, "agregar.html", {
                 "titulo": "AGREGAR TAREA",
                 "form": form
             })
