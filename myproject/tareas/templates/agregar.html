@@ -1,0 +1,10 @@
+{% extends "plantilla.html" %}
+
+{% block body %}
+<h1>Agregar Tarea:</h1>
+<form action="{% url 'agregar' %}" method="post">
+    <input type="text" , name="tarea">
+    <input type="submit">
+</form>
+<a href="{% url 'index' %}">Ver Tareas</a>
+{% endblock %}
