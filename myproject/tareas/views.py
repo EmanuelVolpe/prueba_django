@@ -1,12 +1,10 @@
+from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django import forms
+
 
 # Create your views here.
-
-tareas = ["foo", "bar", "baz"]
-
 
 class FormularioNuevaTarea(forms.Form):
     tarea = forms.CharField(label="Nueva Tarea")
@@ -17,9 +15,12 @@ class FormularioNuevaTarea(forms.Form):
 
 
 def index(request):
+    if "tareas" not in request.session:
+        # If not, create a new list
+        request.session["tareas"] = []
     return render(request, "index.html", {
         "titulo": "TAREAS",
-        "tareas": tareas
+        "tareas": request.session["tareas"]
     })
 
 # Agrega una nueva tarea:
@@ -39,7 +40,7 @@ def agregar(request):
             tarea = form.cleaned_data["tarea"]
 
             # Add the new task to our list of tasks
-            tareas.append(tarea)
+            request.session["tareas"] += [tarea]
 
             # Redirect user to list of tasks
             return HttpResponseRedirect(reverse("index"))

@@ -1,9 +1,12 @@
 {% extends "plantilla.html" %}
 
 {% block body %}
+<h1>Lista de Tareas:</h1>
 <ul>
     {% for tarea in tareas %}
     <li>{{ tarea }}</li>
+    {% empty %}
+    <li>No hay Tareas para mostrar</li>
     {% endfor %}
 </ul>
 <a href="{% url 'agregar' %}">Agregar una nueva Tarea</a>
